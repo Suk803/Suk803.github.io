@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
+<meta name="description" content="1.lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下sqli-labs搭建">
 <meta property="og:url" content="http://yoursite.com/2018/11/25/Ubuntu下sqli-labs搭建/index.html">
 <meta property="og:site_name" content="Suk803&#39;s Blog">
-<meta property="og:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
+<meta property="og:description" content="1.lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/6XNIuXx.png">
 <meta property="og:image" content="https://i.imgur.com/zSG4lcH.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="https://i.imgur.com/MCOw5mL.png">
 <meta property="og:image" content="https://i.imgur.com/wJadldp.png">
 <meta property="og:image" content="https://i.imgur.com/1qYyieC.png">
-<meta property="og:updated_time" content="2018-11-26T13:34:27.132Z">
+<meta property="og:updated_time" content="2018-11-26T13:37:45.583Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下sqli-labs搭建">
-<meta name="twitter:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
+<meta name="twitter:description" content="1.lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA">
 <meta name="twitter:image" content="https://i.imgur.com/6XNIuXx.png">
 
 
@@ -309,9 +309,7 @@
       
 
       
-        <ol>
-<li>搭建<br>1.1 lamp环境<br><strong>注意</strong>：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。<br>而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。<br>故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA(Personal Package Archives)源来下载安装PHP5.6 。下面介绍后者：</li>
-</ol>
+        <p>1.lamp环境<br><strong>注意</strong>：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。<br>而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。<br>故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA(Personal Package Archives)源来下载安装PHP5.6 。下面介绍后者：</p>
 <p>①添加PHP的PPA源并升级软件包</p>
 <blockquote>
 <p>sudo add-apt-repository ppa:ondrej/php<br>sudo apt update<br>sudo apt upgrade</p>
@@ -340,7 +338,7 @@
 <p>分析：通过 info.php 或 php -m 来查看已安装的PHP扩展，发现报错的相应扩展都已安装成功，故猜测可能是php.ini还未正确指定php扩展所在的文件夹路径，导致扩展无法使用。故需要进行第⑥步。</p>
 <p>⑦测试PHP是否能连接MySQL数据库(aa.php)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"debian-sys-maint"</span>;</span><br><span class="line">$password = <span class="string">"7gf6fPNXRuySr0HD"</span>;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"连接成功"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><img src="https://i.imgur.com/mYxTUDY.png" alt=""></p>
-<p>&emsp; 1.2 下载、连接、建库插数据<br>①下载sqli-labs源码(sqli-labs-master.zip)并解压至/var/www/html目录下 [ 或通过git clone ]<br>下载地址：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a><br>原作者博客地址(含sqli-labs相关系列文章及视频教程)：<a href="http://dummy2dummies.blogspot.hk/" target="_blank" rel="noopener">http://dummy2dummies.blogspot.hk/</a><br>解压</p>
+<p>2.下载、连接、建库插数据<br>①下载sqli-labs源码(sqli-labs-master.zip)并解压至/var/www/html目录下 [ 或通过git clone ]<br>下载地址：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a><br>原作者博客地址(含sqli-labs相关系列文章及视频教程)：<a href="http://dummy2dummies.blogspot.hk/" target="_blank" rel="noopener">http://dummy2dummies.blogspot.hk/</a><br>解压</p>
 <blockquote>
 <p>sudo unzip -d /var/www/html sqli-labs-master.zip</p>
 </blockquote>
