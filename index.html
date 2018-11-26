@@ -300,7 +300,7 @@
       
         
           
-            <h2 id="Ubuntu下sqli-labs搭建"><a href="#Ubuntu下sqli-labs搭建" class="headerlink" title="#Ubuntu下sqli-labs搭建"></a>#Ubuntu下sqli-labs搭建</h2><ol>
+            <ol>
 <li>搭建<br>1.1 lamp环境<br><strong>注意</strong>：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。<pre><code>而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。
 故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA(Personal Package Archives)源来下载安装PHP5.6 。下面介绍后者：
 </code></pre></li>
@@ -322,23 +322,25 @@
 <p>sudo a2dismod php7.2 //禁用PHP7.2<br>sudo a2enmod  php5.6 //启用PHP5.6<br>sudo /etc/init.d/apache2 restart //重启Apache2(以使前两个操作生效)</p>
 </blockquote>
 <p>⑤测试php5.6是否安装并运行成功(info.php)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">        phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="./info.php.PNG" alt="Alt text"></p>
+<p><img src="https://i.imgur.com/6XNIuXx.png" alt=""></p>
 <p>⑥配置php.ini文件<br>由第⑤步可以看到php.ini该配置文件的路径 (/etc/php/5.6/apache2/php.ini) [ Loaded Configuration File一栏 ] 以及PHP扩展所在的文件夹20131226 [ PHP Extension一栏 ]</p>
-<p>S1:使用命令行  find / -name “20131226”  查找到文件夹20131226的路径为/usr/lib/php/20131226<br><img src="./find20131226.PNG" alt="Alt text"></p>
-<p>S2:打开php.ini文件，找到Paths and Directories，并修改其下的 ;extension_dir = “./“ 为  extension_dir = “/usr/lib/php/20131226” (即去掉语句前面的;表示启用，并且添加PHP扩展所在文件夹的路径)<br> <img src="./扩展.PNG" alt="Alt text"></p>
+<p>S1:使用命令行  find / -name “20131226”  查找到文件夹20131226的路径为/usr/lib/php/20131226<br><img src="https://i.imgur.com/zSG4lcH.png" alt=""></p>
+<p>S2:打开php.ini文件，找到Paths and Directories，并修改其下的 ;extension_dir = “./“ 为  extension_dir = “/usr/lib/php/20131226” (即去掉语句前面的;表示启用，并且添加PHP扩展所在文件夹的路径)<br><img src="https://i.imgur.com/EyPgc77.png" alt=""></p>
 <p><strong>注意</strong>：PHP在UNIX下和Windows下的不同，如：<br>其一：文件路径<br>; UNIX: “<font color="#FF0000">/path1:/path2</font>“<br>;include_path = “.:/usr/share/php”<br>;<br>; Windows: “<font color="#FF0000">\path1;\path2</font>“<br>;include_path = “.;c:\php\includes”<br>其二：扩展名<br>; If you wish to have an extension loaded automatically, use the following<br>; syntax:<br>;<br>;   extension=modulename.extension<br>;<br>; For example, on Windows:<br>;<br>;   extension=msql<font color="#FF0000">.dll</font><br>;<br>; … or under UNIX:<br>;<br>;   extension=msql<font color="#FF0000">.so</font><br>;<br>; … or with a path:<br>;<br>;   extension=/path/to/extension/msql.so</p>
 <p><strong>注意</strong>：第⑤步结束后，如果不按照第⑥步<strong>正确</strong>指定php5.6扩展的文件路径，则会导致PHP扩展均无法使用，比如mysql.so无法使用，则sqli-labs不能通过PHP的mysql扩展连接MySQL，那么建库插数据及后续操作均无法进行，具体表现如下：</p>
-<p>打开aa.php(使用mysqli函数，测试PHP连接MySQL)发现一片空白<br><img src="./1543032702732.png" alt="Alt text"><br>建库插数据时停留在此页面<br><img src="./error.PNG" alt="Alt text"><br>打开/var/log/apache2/error.log查看Apache2错误日志发现找不到mysqli[aa.php中]以及未定义mysql_connect()</p>
+<p>打开aa.php(使用mysqli函数，测试PHP连接MySQL)发现一片空白</p>
+<p><img src="https://i.imgur.com/n6gz2zL.png" alt=""><br>建库插数据时停留在此页面</p>
+<p><img src="https://i.imgur.com/dEZYTg5.png" alt=""><br>打开/var/log/apache2/error.log查看Apache2错误日志发现找不到mysqli[aa.php中]以及未定义mysql_connect()</p>
 <p>分析：通过 info.php 或 php -m 来查看已安装的PHP扩展，发现报错的相应扩展都已安装成功，故猜测可能是php.ini还未正确指定php扩展所在的文件夹路径，导致扩展无法使用。</p>
 <p>⑦测试PHP是否能连接MySQL数据库(aa.php)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"debian-sys-maint"</span>;</span><br><span class="line">$password = <span class="string">"7gf6fPNXRuySr0HD"</span>;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"连接成功"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="./aa.php.PNG" alt="Alt text"></p>
+<p><img src="https://i.imgur.com/mYxTUDY.png" alt=""></p>
 <p>&emsp; 1.2 下载、连接、建库插数据<br>①下载sqli-labs源码(sqli-labs-master.zip)并解压至/var/www/html目录下 [ 或通过git clone ]<br>下载地址：<a href="https://github.com/Audi-1/sqli-labs" target="_blank" rel="noopener">https://github.com/Audi-1/sqli-labs</a><br>原作者博客地址(含sqli-labs相关系列文章及视频教程)：<a href="http://dummy2dummies.blogspot.hk/" target="_blank" rel="noopener">http://dummy2dummies.blogspot.hk/</a><br>解压</p>
 <blockquote>
 <p>sudo unzip -d /var/www/html sqli-labs-master.zip</p>
 </blockquote>
-<p>测试sqli-labs是否安装成功<br>通过浏览器访问<a href="http://localhost/sqli-labs-master(或http://127.0.0.1/sqli-labs-master)以测试sqli-labs是否安装成功。如出现如下界面，则表明安装成功：" target="_blank" rel="noopener">http://localhost/sqli-labs-master(或http://127.0.0.1/sqli-labs-master)以测试sqli-labs是否安装成功。如出现如下界面，则表明安装成功：</a><br><img src="./在本地访问sqli-labs-master.PNG" alt="Alt text"></p>
-<p>②连接数据库<br>修改/var/www/html/sqli-labs-master/sql-connections/db-creds.inc中的dbuser和dbpass值<br><img src="./db-creds.PNG" alt="Alt text"></p>
-<p>③创建必要的数据库并插入一些数据<br>点击首页 Setup/reset Database for labs 链接<br><img src="./新建库插数据.PNG" alt="Alt text"></p>
+<p>测试sqli-labs是否安装成功<br>通过浏览器访问<a href="http://localhost/sqli-labs-master" target="_blank" rel="noopener">http://localhost/sqli-labs-master</a> ( 或<a href="http://127.0.0.1/sqli-labs-master" target="_blank" rel="noopener">http://127.0.0.1/sqli-labs-master</a> ) 以测试sqli-labs是否安装成功。如出现如下界面，则表明安装成功：<br><img src="https://i.imgur.com/2qM2ixu.png" alt=""></p>
+<p>②连接数据库<br>修改/var/www/html/sqli-labs-master/sql-connections/db-creds.inc中的dbuser和dbpass值<br><img src="https://i.imgur.com/wJadldp.png" alt=""></p>
+<p>③创建必要的数据库并插入一些数据<br>点击首页 Setup/reset Database for labs 链接<br><img src="https://i.imgur.com/1qYyieC.png" alt=""></p>
 
           
         
