@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。 故我们需要通过在PHP官网上下载PHP5.6或添加PHP5">
+<meta name="description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu下sqli-labs搭建">
 <meta property="og:url" content="http://yoursite.com/2018/11/25/Ubuntu下sqli-labs搭建/index.html">
 <meta property="og:site_name" content="Suk803&#39;s Blog">
-<meta property="og:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。 故我们需要通过在PHP官网上下载PHP5.6或添加PHP5">
+<meta property="og:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.imgur.com/6XNIuXx.png">
 <meta property="og:image" content="https://i.imgur.com/zSG4lcH.png">
@@ -95,10 +95,10 @@
 <meta property="og:image" content="https://i.imgur.com/2qM2ixu.png">
 <meta property="og:image" content="https://i.imgur.com/wJadldp.png">
 <meta property="og:image" content="https://i.imgur.com/1qYyieC.png">
-<meta property="og:updated_time" content="2018-11-26T12:45:54.067Z">
+<meta property="og:updated_time" content="2018-11-26T12:52:06.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu下sqli-labs搭建">
-<meta name="twitter:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。 故我们需要通过在PHP官网上下载PHP5.6或添加PHP5">
+<meta name="twitter:description" content="搭建1.1 lamp环境注意：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.">
 <meta name="twitter:image" content="https://i.imgur.com/6XNIuXx.png">
 
 
@@ -310,9 +310,7 @@
 
       
         <ol>
-<li>搭建<br>1.1 lamp环境<br><strong>注意</strong>：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。<pre><code>而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。
-故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA(Personal Package Archives)源来下载安装PHP5.6 。下面介绍后者：
-</code></pre></li>
+<li>搭建<br>1.1 lamp环境<br><strong>注意</strong>：sqli-labs通过mysql函数 [ PHP7及以后废弃该扩展 ] 来连接MySQL数据库，故我们可以使用PHP5.6。<br>而在Ubuntu官方源中不同Ubuntu版本对应默认的php版本不同，在Ubuntu16(默认PHP7.0)及以后中直接使用apt安装PHP5.6会出现找不到PHP5.6安装包的情况。<br>故我们需要通过在PHP官网上下载PHP5.6或添加PHP5.6的PPA(Personal Package Archives)源来下载安装PHP5.6 。下面介绍后者：</li>
 </ol>
 <p>①添加PHP的PPA源并升级软件包</p>
 <blockquote>
@@ -337,8 +335,8 @@
 <p>S2:打开php.ini文件，找到Paths and Directories，并修改其下的 ;extension_dir = “./“ 为  extension_dir = “/usr/lib/php/20131226” (即去掉语句前面的;表示启用，并且添加PHP扩展所在文件夹的路径)<br><img src="https://i.imgur.com/EyPgc77.png" alt=""></p>
 <p><strong>注意</strong>：PHP在UNIX下和Windows下的不同，如：<br>其一：文件路径<br>; UNIX: “<font color="#FF0000">/path1:/path2</font>“<br>;include_path = “.:/usr/share/php”<br>;<br>; Windows: “<font color="#FF0000">\path1;\path2</font>“<br>;include_path = “.;c:\php\includes”<br>其二：扩展名<br>; If you wish to have an extension loaded automatically, use the following<br>; syntax:<br>;<br>;   extension=modulename.extension<br>;<br>; For example, on Windows:<br>;<br>;   extension=msql<font color="#FF0000">.dll</font><br>;<br>; … or under UNIX:<br>;<br>;   extension=msql<font color="#FF0000">.so</font><br>;<br>; … or with a path:<br>;<br>;   extension=/path/to/extension/msql.so</p>
 <p><strong>注意</strong>：第⑤步结束后，如果不按照第⑥步<strong>正确</strong>指定php5.6扩展的文件路径，则会导致PHP扩展均无法使用，比如mysql.so无法使用，则sqli-labs不能通过PHP的mysql扩展连接MySQL，那么建库插数据及后续操作均无法进行，具体表现如下：</p>
-<p>打开aa.php(使用mysqli函数，测试PHP连接MySQL)发现一片空白</p>
-<p><img src="https://i.imgur.com/n6gz2zL.png" alt=""><br>建库插数据时停留在此页面</p>
+<p>打开aa.php(使用mysqli函数，测试PHP连接MySQL)发现一片空白  </p>
+<p><img src="https://i.imgur.com/n6gz2zL.png" alt=""><br>建库插数据时停留在此页面  </p>
 <p><img src="https://i.imgur.com/dEZYTg5.png" alt=""><br>打开/var/log/apache2/error.log查看Apache2错误日志发现找不到mysqli[aa.php中]以及未定义mysql_connect()</p>
 <p>分析：通过 info.php 或 php -m 来查看已安装的PHP扩展，发现报错的相应扩展都已安装成功，故猜测可能是php.ini还未正确指定php扩展所在的文件夹路径，导致扩展无法使用。</p>
 <p>⑦测试PHP是否能连接MySQL数据库(aa.php)<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$servername = <span class="string">"localhost"</span>;</span><br><span class="line">$username = <span class="string">"debian-sys-maint"</span>;</span><br><span class="line">$password = <span class="string">"7gf6fPNXRuySr0HD"</span>;</span><br><span class="line">$conn = <span class="keyword">new</span> mysqli($servername, $username, $password);</span><br><span class="line"><span class="keyword">if</span> ($conn-&gt;connect_error) &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"连接失败: "</span> . $conn-&gt;connect_error);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"连接成功"</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></p>
